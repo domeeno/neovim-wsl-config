@@ -275,6 +275,8 @@ vim.api.nvim_create_autocmd('TextYankPost', {
   pattern = '*',
 })
 
+require('elixir').setup()
+
 -- [[ Configure Telescope ]]
 -- See `:help telescope` and `:help telescope.setup()`
 require('telescope').setup {
