@@ -22,7 +22,3 @@ vim.o.mouse = 'a'
 
 vim.o.completeopt = 'menuone,noselect'
 
-vim.cmd('autocmd FileType elixir colorscheme onedark')
-
-vim.cmd([[colorscheme gruvbox]])
-

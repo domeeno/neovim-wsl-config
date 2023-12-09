@@ -84,21 +84,14 @@ _G.packer_plugins = {
     path = "/home/dom/.local/share/nvim/site/pack/packer/start/cmp-nvim-lsp",
     url = "https://github.com/hrsh7th/cmp-nvim-lsp"
   },
-  elixir = {
-    config = { "\27LJ\2\n;\0\0\3\0\4\0\0066\0\0\0009\0\1\0009\0\2\0'\2\3\0B\0\2\1K\0\1\0\fonedark\16colorscheme\bcmd\bvim\0" },
-    loaded = true,
-    path = "/home/dom/.local/share/nvim/site/pack/packer/start/elixir",
-    url = "https://github.com/navarasu/onedark.nvim"
-  },
   ["gitsigns.nvim"] = {
     loaded = true,
     path = "/home/dom/.local/share/nvim/site/pack/packer/start/gitsigns.nvim",
     url = "https://github.com/lewis6991/gitsigns.nvim"
   },
-  gruvbox = {
-    config = { "\27LJ\2\n;\0\0\3\0\4\0\0066\0\0\0009\0\1\0009\0\2\0'\2\3\0B\0\2\1K\0\1\0\fgruvbox\16colorscheme\bcmd\bvim\0" },
+  ["gruvbox.nvim"] = {
     loaded = true,
-    path = "/home/dom/.local/share/nvim/site/pack/packer/start/gruvbox",
+    path = "/home/dom/.local/share/nvim/site/pack/packer/start/gruvbox.nvim",
     url = "https://github.com/ellisonleao/gruvbox.nvim"
   },
   ["lsp-zero.nvim"] = {
@@ -131,6 +124,11 @@ _G.packer_plugins = {
     path = "/home/dom/.local/share/nvim/site/pack/packer/start/nvim-treesitter",
     url = "https://github.com/nvim-treesitter/nvim-treesitter"
   },
+  ["onedark.nvim"] = {
+    loaded = true,
+    path = "/home/dom/.local/share/nvim/site/pack/packer/start/onedark.nvim",
+    url = "https://github.com/navarasu/onedark.nvim"
+  },
   ["packer.nvim"] = {
     loaded = true,
     path = "/home/dom/.local/share/nvim/site/pack/packer/start/packer.nvim",
@@ -146,6 +144,11 @@ _G.packer_plugins = {
     path = "/home/dom/.local/share/nvim/site/pack/packer/start/telescope.nvim",
     url = "https://github.com/nvim-telescope/telescope.nvim"
   },
+  undotree = {
+    loaded = true,
+    path = "/home/dom/.local/share/nvim/site/pack/packer/start/undotree",
+    url = "https://github.com/mbbill/undotree"
+  },
   ["vim-fugitive"] = {
     loaded = true,
     path = "/home/dom/.local/share/nvim/site/pack/packer/start/vim-fugitive",
@@ -159,14 +162,6 @@ _G.packer_plugins = {
 }
 
 time([[Defining packer_plugins]], false)
--- Config for: gruvbox
-time([[Config for gruvbox]], true)
-try_loadstring("\27LJ\2\n;\0\0\3\0\4\0\0066\0\0\0009\0\1\0009\0\2\0'\2\3\0B\0\2\1K\0\1\0\fgruvbox\16colorscheme\bcmd\bvim\0", "config", "gruvbox")
-time([[Config for gruvbox]], false)
--- Config for: elixir
-time([[Config for elixir]], true)
-try_loadstring("\27LJ\2\n;\0\0\3\0\4\0\0066\0\0\0009\0\1\0009\0\2\0'\2\3\0B\0\2\1K\0\1\0\fonedark\16colorscheme\bcmd\bvim\0", "config", "elixir")
-time([[Config for elixir]], false)
 
 _G._packer.inside_compile = false
 if _G._packer.needs_bufread == true then

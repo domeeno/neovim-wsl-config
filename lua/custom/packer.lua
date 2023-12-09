@@ -13,30 +13,18 @@ return require('packer').startup(function(use)
     requires = { {'nvim-lua/plenary.nvim'} }
   }
 
-  -- gruvbox
-  use ({
-    'ellisonleao/gruvbox.nvim',
-    priority = 1000,
-    as = "gruvbox", 
-    config = function()
-      vim.cmd.colorscheme 'gruvbox'
-    end,
-  })
+  -- theme gruvbox
+  use ('ellisonleao/gruvbox.nvim')
 
-  -- atom
-  use ({
-    'navarasu/onedark.nvim',
-    as = "elixir",
-    config = function()
-      vim.cmd.colorscheme 'onedark'
-    end,
-  })
+  -- theme atom
+  use ('navarasu/onedark.nvim')
 
 
   use('nvim-treesitter/nvim-treesitter', {run = ':TSUpdate'})
   use('tpope/vim-fugitive')
   use('lewis6991/gitsigns.nvim')
   use('folke/which-key.nvim')
+  use('mbbill/undotree')
 
   use {
     'VonHeikemen/lsp-zero.nvim',
