@@ -20,5 +20,3 @@ vim.opt.scrolloff = 8
 
 vim.o.mouse = 'a'
 
-vim.o.completeopt = 'menuone,noselect'
-
