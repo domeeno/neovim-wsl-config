@@ -6,14 +6,23 @@ vim.o.expandtab = true
 
 vim.cmd('syntax on')
 
-vim.wo.number = true
-
-vim.wo.relativenumber = true
+vim.opt.nu = true
+vim.opt.relativenumber = true
 
 vim.o.clipboard = 'unnamedplus'
 
+vim.opt.hlsearch = false
+vim.opt.incsearch = true
+
+vim.opt.termguicolors = true
+
+vim.opt.scrolloff = 8
+
 vim.o.mouse = 'a'
+
+vim.o.completeopt = 'menuone,noselect'
 
 vim.cmd('autocmd FileType elixir colorscheme onedark')
 
 vim.cmd([[colorscheme gruvbox]])
+
