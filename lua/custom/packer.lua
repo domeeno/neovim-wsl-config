@@ -10,39 +10,49 @@ return require('packer').startup(function(use)
   use {
     'nvim-telescope/telescope.nvim', tag = '0.1.5',
     -- or                            , branch = '0.1.x',
-    requires = { {'nvim-lua/plenary.nvim'} }
+    requires = { { 'nvim-lua/plenary.nvim' } }
   }
 
   -- theme gruvbox
-  use ('ellisonleao/gruvbox.nvim')
+  use('ellisonleao/gruvbox.nvim')
 
   -- theme atom
-  use ('navarasu/onedark.nvim')
+  use('navarasu/onedark.nvim')
 
 
-  use('nvim-treesitter/nvim-treesitter', {run = ':TSUpdate'})
-  use('tpope/vim-fugitive')
-  use('lewis6991/gitsigns.nvim')
-  use('folke/which-key.nvim')
-  use('mbbill/undotree')
+  use('nvim-treesitter/nvim-treesitter', { run = ':TSUpdate' }) -- syntax highlighter
+  use('tpope/vim-fugitive')                                     -- git integration
+  use('lewis6991/gitsigns.nvim')                                -- git integration
+  use('folke/which-key.nvim')                                   -- command whisperer
+  use('mbbill/undotree')                                        -- undo history
 
   use {
     'VonHeikemen/lsp-zero.nvim',
     branch = 'v3.x',
     requires = {
       --- Uncomment these if you want to manage LSP servers from neovim
-      {'williamboman/mason.nvim'},
-      {'williamboman/mason-lspconfig.nvim'},
+      { 'williamboman/mason.nvim' },
+      { 'williamboman/mason-lspconfig.nvim' },
 
       -- LSP Support
-      {'neovim/nvim-lspconfig'},
+      { 'neovim/nvim-lspconfig' },
       -- Autocompletion
-      {'hrsh7th/nvim-cmp'},
-      {'hrsh7th/cmp-nvim-lsp'},
-      {'L3MON4D3/LuaSnip'}
+      { 'hrsh7th/nvim-cmp' },
+      { 'hrsh7th/cmp-nvim-lsp' },
+      { 'L3MON4D3/LuaSnip' }
     }
   }
 
+  use {
+    'nvim-lualine/lualine.nvim',
+    requires = { 'nvim-tree/nvim-web-devicons', opt = true }
+  }                                     -- pretty status line
+
+  use { "windwp/nvim-autopairs" }       -- autopairs
+  use { "norcalli/nvim-colorizer.lua" } -- show hex color
+
+  use { 'iamcco/markdown-preview.nvim' }
+
   -- language specific plugins
-  use({ "elixir-tools/elixir-tools.nvim", tag = "stable", requires = { "nvim-lua/plenary.nvim" }})
+  use({ "elixir-tools/elixir-tools.nvim", tag = "stable", requires = { "nvim-lua/plenary.nvim" } })
 end)
