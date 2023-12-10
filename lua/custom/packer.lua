@@ -42,4 +42,7 @@ return require('packer').startup(function(use)
       {'L3MON4D3/LuaSnip'}
     }
   }
+
+  -- language specific plugins
+  use({ "elixir-tools/elixir-tools.nvim", tag = "stable", requires = { "nvim-lua/plenary.nvim" }})
 end)
