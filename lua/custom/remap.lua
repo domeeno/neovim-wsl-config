@@ -7,6 +7,11 @@ vim.keymap.set("n", "<leader>q", function()
   end,
   { desc = "Save and [Q]uit all" }
 )
+vim.keymap.set("n", "<leader>S", function()
+    vim.cmd("wa")
+  end,
+  { desc = "[S]ave all" }
+)
 vim.keymap.set("n", "<leader>u", vim.cmd.UndotreeToggle, { desc = "Toggle [U]ndo Tree" })
 
 
