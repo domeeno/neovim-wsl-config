@@ -14,8 +14,6 @@ vim.keymap.set("n", "<leader>S", function()
 )
 vim.keymap.set("n", "<leader>u", vim.cmd.UndotreeToggle, { desc = "Toggle [U]ndo Tree" })
 
-
-
 -- HACKS
 -- move lines of code up and down
 vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv")

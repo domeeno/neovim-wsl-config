@@ -9,7 +9,6 @@ return require('packer').startup(function(use)
 
   use {
     'nvim-telescope/telescope.nvim', tag = '0.1.5',
-    -- or                            , branch = '0.1.x',
     requires = { { 'nvim-lua/plenary.nvim' } }
   }
 
@@ -36,6 +35,7 @@ return require('packer').startup(function(use)
 
       -- LSP Support
       { 'neovim/nvim-lspconfig' },
+
       -- Autocompletion
       { 'hrsh7th/nvim-cmp' },
       { 'hrsh7th/cmp-nvim-lsp' },
@@ -43,16 +43,23 @@ return require('packer').startup(function(use)
     }
   }
 
+
+
   use {
     'nvim-lualine/lualine.nvim',
     requires = { 'nvim-tree/nvim-web-devicons', opt = true }
   }                                     -- pretty status line
 
-  use { "windwp/nvim-autopairs" }       -- autopairs
-  use { "norcalli/nvim-colorizer.lua" } -- show hex color
+  use { 'windwp/nvim-autopairs' }       -- autopairs
+  use { 'norcalli/nvim-colorizer.lua' } -- show hex color
 
   use { 'iamcco/markdown-preview.nvim' }
+  use { "akinsho/toggleterm.nvim", tag = '*', config = function()
+    require("toggleterm").setup()
+  end }
 
   -- language specific plugins
-  use({ "elixir-tools/elixir-tools.nvim", tag = "stable", requires = { "nvim-lua/plenary.nvim" } })
+  use({ 'elixir-tools/elixir-tools.nvim', tag = 'stable', requires = { 'nvim-lua/plenary.nvim' } }) -- elixir
+  use('nvimtools/none-ls.nvim')                                                                     -- for nextjs/reactjs js/ts/tsx/jsx autoformatting
+  use("windwp/nvim-ts-autotag")                                                                     -- html autotag completion
 end)
