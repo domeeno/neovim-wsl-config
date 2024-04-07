@@ -22,6 +22,8 @@ return require('packer').startup(function(use)
   use('nvim-treesitter/nvim-treesitter', { run = ':TSUpdate' }) -- syntax highlighter
   use('tpope/vim-fugitive')                                     -- git integration
   use('lewis6991/gitsigns.nvim')                                -- git integration
+  use('nvim-tree/nvim-web-devicons')                            -- icons
+  use('romgrk/barbar.nvim')                                     -- nvim tabs manager
   use('folke/which-key.nvim')                                   -- command whisperer
   use('mbbill/undotree')                                        -- undo history
 
