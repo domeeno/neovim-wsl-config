@@ -1,9 +1,8 @@
 -- Syntax Highlighting
 require 'nvim-treesitter.configs'.setup {
-  ensure_installed = { 'c', 'cpp', 'go', 'lua', 'python', 'rust', 'tsx', 'javascript', 'typescript', 'vimdoc', 'vim', 'elixir' },
+  sync_install = true,
 
-
-  sync_install = false,
+  ensure_installed = { 'c', 'html', 'cpp', 'go', 'markdown', 'lua', 'python', 'rust', 'tsx', 'javascript', 'typescript', 'vimdoc', 'vim', 'elixir' },
 
   auto_install = true,
 

@@ -61,5 +61,4 @@ return require('packer').startup(function(use)
   -- language specific plugins
   use({ 'elixir-tools/elixir-tools.nvim', tag = 'stable', requires = { 'nvim-lua/plenary.nvim' } }) -- elixir
   use('nvimtools/none-ls.nvim')                                                                     -- for nextjs/reactjs js/ts/tsx/jsx autoformatting
-  use("windwp/nvim-ts-autotag")                                                                     -- html autotag completion
 end)
