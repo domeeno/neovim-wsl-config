@@ -12,7 +12,6 @@ return {
     }
 }
 
-      vim.cmd([[colorscheme tokyonight]])
     end
   },
 
@@ -45,7 +44,7 @@ require("gruvbox").setup({
   transparent_mode = true,
 })
 
-      vim.cmd([[colorscheme gruvbox]])
+      vim.cmd([[colorscheme tokyonight]])
     end
   },
 
