@@ -3,6 +3,7 @@ return {
     'williamboman/mason.nvim',
     lazy = false,
     opts = {},
+    keys = { { "<leader>cm", "<cmd>Mason<cr>", desc = "Mason" } }
   },
 
   -- Autocompletion
@@ -11,11 +12,6 @@ return {
     event = 'InsertEnter',
     config = function()
       local cmp = require('cmp')
-
-      cmp.event:on(
-        'confirm_done',
-        cmp_autopairs.on_confirm_done
-      )
 
       cmp.setup({
         sources = {
@@ -106,7 +102,7 @@ return {
       })
 
       require('mason-lspconfig').setup({
-        ensure_installed = { 'c', 'cpp', 'go', 'markdown', 'lua', 'python', 'tsx', 'javascript', 'typescript', 'vimdoc', 'vim' },
+        ensure_installed = {},
         handlers = {
           -- this first function is the "default handler"
           -- it applies to every language server without a "custom handler"
