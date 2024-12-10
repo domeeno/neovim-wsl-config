@@ -83,10 +83,8 @@ return {
       })
     end
   },
-
   {
     'nvimtools/none-ls.nvim',
-
     config = function()
       local lsp_fmt_augroup = vim.api.nvim_create_augroup("LspFormatting", {})
       local none_ls = require('null-ls')

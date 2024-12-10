@@ -6,7 +6,7 @@ return {
     keys = { { "<leader>cm", "<cmd>Mason<cr>", desc = "Mason" } }
   },
 
-  {'VonHeikemen/lsp-zero.nvim' },
+  { 'VonHeikemen/lsp-zero.nvim' },
   {
     "L3MON4D3/LuaSnip",
     -- follow latest release.
@@ -87,6 +87,7 @@ return {
       { 'hrsh7th/cmp-nvim-lsp' },
       { 'williamboman/mason.nvim' },
       { 'williamboman/mason-lspconfig.nvim' },
+      { 'jay-babu/mason-nvim-dap.nvim' },
       { 'VonHeikemen/lsp-zero.nvim' },
     },
     init = function()
@@ -113,21 +114,28 @@ return {
         callback = function(event)
           local opts = { buffer = event.buf }
 
+          local builtin = require("telescope.builtin")
+
           vim.keymap.set('n', 'K', '<cmd>lua vim.lsp.buf.hover()<cr>', opts)
-          vim.keymap.set('n', 'gd', '<cmd>lua vim.lsp.buf.definition()<cr>', opts)
-          vim.keymap.set('n', 'gD', '<cmd>lua vim.lsp.buf.declaration()<cr>', opts)
-          vim.keymap.set('n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<cr>', opts)
-          vim.keymap.set('n', 'go', '<cmd>lua vim.lsp.buf.type_definition()<cr>', opts)
-          vim.keymap.set('n', 'gr', '<cmd>lua vim.lsp.buf.references()<cr>', opts)
-          vim.keymap.set('n', 'gS', '<cmd>lua vim.lsp.buf.signature_help()<cr>', opts)
-          vim.keymap.set('n', '<F2>', '<cmd>lua vim.lsp.buf.rename()<cr>', opts)
-          vim.keymap.set({ 'n', 'x' }, '<F3>', '<cmd>lua vim.lsp.buf.format({async = true})<cr>', opts)
-          vim.keymap.set('n', '<F4>', '<cmd>lua vim.lsp.buf.code_action()<cr>', opts)
+          vim.keymap.set({ 'n', 'x' }, '<F3>', '<cmd>lua vim.lsp.buf.format({async = true})<cr>',
+            { desc = "Format", buffer = event.buf })
+
+          vim.keymap.set('n', '<F4>', '<cmd>lua vim.lsp.buf.code_action()<cr>',
+            { desc = "Code Action", buffer = event.buf })
+
+          vim.keymap.set('n', 'gd', vim.lsp.buf.definition, { desc = "[G]o to [D]efinition", buffer = event.buf })
+          vim.keymap.set('n', 'gr', builtin.lsp_references, { desc = "[G]o to [R]eferences", buffer = event.buf })
+          vim.keymap.set('n', 'gi', builtin.lsp_implementations,
+            { desc = "[G]o to [I]mplementations", buffer = event.buf })
+          vim.keymap.set('n', '<F2>', vim.lsp.buf.rename, { desc = "Rename", buffer = event.buf })
+          vim.keymap.set('n', 'go', vim.lsp.buf.type_definition, { desc = "[G]o to Type Definition", buffer = event.buf })
+          vim.keymap.set('n', 'gS', vim.lsp.buf.signature_help, { desc = "[G]et [S]ignature help", buffer = event.buf })
+          vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, { desc = { '[G]o to [D]eclaration' }, buffer = event.buf })
         end,
       })
 
       require('mason-lspconfig').setup({
-        ensure_installed = {},
+        ensure_installed = { "lua_ls", "jdtls" },
         handlers = {
           lsp_zero.default_setup,
           lua_ls = function()
@@ -136,6 +144,16 @@ return {
           end,
         }
       })
+
+      require('mason-nvim-dap').setup({
+        ensure_installed = { "java-debug-adapter", "java-test" }
+      })
     end
-  }
+  },
+  {
+    "mfussenegger/nvim-jdtls",
+    dependencies = {
+      "mfussenegger/nvim-dap",
+    }
+  },
 }
