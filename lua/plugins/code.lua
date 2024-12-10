@@ -1,20 +1,13 @@
 -- Plugins for coding (syntax highlighting, lsps, language server managers etc.
 return {
   {
-    'mbbill/undotree',
-    config = function()
-      vim.keymap.set("n", "<leader>u", vim.cmd.UndotreeToggle, { desc = "Toggle [U]ndo Tree" })
-    end
-  },
-  {
     "nvim-treesitter/nvim-treesitter",
-    version = false, -- last release is way too old and doesn't work on Windows
-    build = ":TSUpdate",
-    -- TODO
-    --event = { "LazyFile",
-    -- VeryLazy TODO maybe add
+    dependencies = {
+      "windwp/nvim-ts-autotag"
+    },
 
-    -- },
+    version = false,             -- last release is way too old and doesn't work on Windows
+    build = ":TSUpdate",
     lazy = vim.fn.argc(-1) == 0, -- load treesitter early when opening a file from the cmdline
     init = function(plugin)
       -- PERF: add nvim-treesitter queries to the rtp and it's custom query predicates early
@@ -31,8 +24,6 @@ return {
       { "<bs>",      desc = "Decrement Selection", mode = "x" },
     },
     opts_extend = { "ensure_installed" },
-    ---@type TSConfig
-    ---@diagnostic disable-next-line: missing-fields
     opts = {
       highlight = { enable = true },
       indent = { enable = true },
@@ -51,6 +42,7 @@ return {
         "markdown",
         "markdown_inline",
         "printf",
+        "gitignore",
         "python",
         "query",
         "regex",
@@ -81,14 +73,15 @@ return {
         },
       },
     },
-    ---@param opts TSConfig
-    -- TODO fix
-    --  config = function(_, opts)
-    --    if type(opts.ensure_installed) == "table" then
-    --      opts.ensure_installed = LazyVim.dedup(opts.ensure_installed)
-    --    end
-    --    require("nvim-treesitter.configs").setup(opts)
-    --  end,
+    config = function()
+      local ts_config = require("nvim-treesitter.configs")
+
+      ts_config.setup({
+        autotag = {
+          enable = true
+        }
+      })
+    end
   },
 
   {
@@ -119,7 +112,5 @@ return {
         end,
       }
     end
-
-
   }
 }
