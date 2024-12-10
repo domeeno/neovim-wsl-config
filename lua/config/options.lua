@@ -5,7 +5,6 @@ vim.g.maplocalleader = "\\"
 -- LazyVim auto format
 vim.g.autoformat = true
 
-
 vim.g.lazyvim_picker = "auto"
 
 -- if the completion engine supports the AI source,
@@ -71,8 +70,9 @@ opt.number = true -- Print line number
 opt.pumblend = 10 -- Popup blend
 opt.pumheight = 10 -- Maximum number of entries in a popup
 opt.relativenumber = true -- Relative line numbers
+opt.numberwidth = 2 -- set width of line number column
 opt.ruler = false -- Disable the default ruler
-opt.scrolloff = 4 -- Lines of context
+opt.scrolloff = 10 -- Lines of context
 opt.sessionoptions = { "buffers", "curdir", "tabpages", "winsize", "help", "globals", "skiprtp", "folds" }
 opt.shiftround = true -- Round indent
 opt.shiftwidth = 2 -- Size of an indent
@@ -88,6 +88,8 @@ opt.splitkeep = "screen"
 opt.splitright = true -- Put new windows right of current
 -- opt.statuscolumn = [[%!v:lua.require'snacks.statuscolumn'.get()]]
 opt.tabstop = 2 -- Number of spaces tabs count for
+opt.softtabstop = 2 -- Number of spaces inserted for <Tab> key
+opt.breakindent = true -- enable line breaking identation
 opt.termguicolors = true -- True color support
 opt.timeoutlen = vim.g.vscode and 1000 or 300 -- Lower than default (1000) to quickly trigger which-key
 opt.undofile = true
@@ -97,6 +99,12 @@ opt.virtualedit = "block" -- Allow cursor to move where there is no text in visu
 opt.wildmode = "longest:full,full" -- Command-line completion mode
 opt.winminwidth = 5 -- Minimum window width
 opt.wrap = false -- Disable line wrap
+
+-- Some behavior
+opt.backup = false
+opt.writebackup = false -- prevent editing of files being edited elsewhere
+opt.fileencoding = "utf-8"
+opt.hlsearch = true
 
 if vim.fn.has("nvim-0.10") == 1 then
   opt.smoothscroll = true

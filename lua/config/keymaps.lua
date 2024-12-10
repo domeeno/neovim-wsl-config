@@ -1,6 +1,5 @@
 vim.keymap.set("n", "<leader><leader>", vim.cmd.Ex)
 
--- This file is automatically loaded by lazyvim.config.init
 local map = vim.keymap.set
 
 -- better up/down
