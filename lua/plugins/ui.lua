@@ -1,13 +1,31 @@
 return {
   {
+    "nvim-tree/nvim-tree.lua",
+    config = function()
+      vim.keymap.set('n', '<leader><leader>', '<cmd>NvimTreeToggle<CR>', { desc = "Toggle Explorer" })
+      require("nvim-tree").setup({
+        hijack_netrw = true,
+        auto_reload_on_write = true
+      })
+    end
+  },
+  {
     'nvim-telescope/telescope.nvim',
     tag = '0.1.8',
-    dependencies = { 'nvim-lua/plenary.nvim' },
+    dependencies = {
+      'nvim-lua/plenary.nvim'
+    },
 
     config = function()
       local builtin = require('telescope.builtin')
-      vim.keymap.set('n', '<leader>sf', builtin.find_files, { desc = '[S]earch [F]iles' })
+      vim.keymap.set('n', '<leader>ff', builtin.find_files, { desc = '[F]ind [F]iles' })
       vim.keymap.set('n', '<leader>gf', builtin.git_files, { desc = 'Search [G]it [F]iles' })
+      vim.keymap.set('n', '<leader>fd', builtin.diagnostics, { desc = '[F]ind [D]iagnostics' })
+      vim.keymap.set('n', '<leader>fg', builtin.live_grep, { desc = '[F]ind [G]rep' })
+      vim.keymap.set('n', '<leader>fr', builtin.resume, { desc = '[F]ind [R]esume' })
+      vim.keymap.set('n', '<leader>fo', builtin.oldfiles, { desc = '[F]ind Recent files' })
+      vim.keymap.set('n', '<leader>fb', builtin.buffers, { desc = '[F]ind Existing [B]uffers' })
+
       vim.keymap.set('n', '<leader>sw', function()
           builtin.grep_string({ search = vim.fn.input("Grep > ") });
         end,
@@ -15,12 +33,35 @@ return {
       )
     end
   },
+  {
+    'nvim-telescope/telescope-ui-select.nvim',
 
+    config = function()
+      -- get access to telescopes nav functions
+      local actions = require("telescope.actions")
+
+      require("telescope").setup({
+        extensions = {
+          ["ui-select"] = {
+            require("telescope.themes").get_dropdown {}
+          }
+        },
+        mappings = {
+          i = {
+            ["<C-n"] = actions.cycle_history_next,
+            ["<C-p"] = actions.cycle_history_prev,
+          }
+        },
+        -- load the ui-select extension for telescope
+        require("telescope").load_extension("ui-select")
+      })
+    end
+  },
   {
     "akinsho/toggleterm.nvim",
     config = function()
       require('toggleterm').setup {
-        size = function(term)
+        size = function()
           return vim.o.columns * 0.3
         end,
         direction = 'float'

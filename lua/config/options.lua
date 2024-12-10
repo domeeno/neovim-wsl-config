@@ -106,6 +106,10 @@ opt.writebackup = false -- prevent editing of files being edited elsewhere
 opt.fileencoding = "utf-8"
 opt.hlsearch = true
 
+-- TODO for NVIM-tree disable netwr
+vim.g.loaded_netrw = 1
+vim.g.loaded_netrwPlugin = 1
+
 if vim.fn.has("nvim-0.10") == 1 then
   opt.smoothscroll = true
   opt.foldexpr = "v:lua.require'lazyvim.util'.ui.foldexpr()"

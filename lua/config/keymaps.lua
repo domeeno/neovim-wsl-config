@@ -1,4 +1,5 @@
-vim.keymap.set("n", "<leader><leader>", vim.cmd.Ex)
+-- TODO commented because moving to NVIM-tree instead of netrw
+-- vim.keymap.set("n", "<leader><leader>", vim.cmd.Ex)
 
 local map = vim.keymap.set
 
@@ -85,8 +86,8 @@ map("n", "gcO", "O<esc>Vcx<esc><cmd>normal gcc<cr>fxa<bs>", { desc = "Add Commen
 -- lazy
 map("n", "<leader>l", "<cmd>Lazy<cr>", { desc = "Lazy" })
 
--- new file
-map("n", "<leader>fn", "<cmd>enew<cr>", { desc = "New File" })
+-- TODO new file
+-- map("n", "<leader>fn", "<cmd>enew<cr>", { desc = "New File" })
 
 map("n", "<leader>xl", "<cmd>lopen<cr>", { desc = "Location List" })
 map("n", "<leader>xq", "<cmd>copen<cr>", { desc = "Quickfix List" })
