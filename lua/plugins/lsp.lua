@@ -7,33 +7,44 @@ return {
   },
 
   { 'VonHeikemen/lsp-zero.nvim' },
+
   {
     "L3MON4D3/LuaSnip",
     -- follow latest release.
     version = "v2.*", -- Replace <CurrentMajor> by the latest released major (first number of latest release)
     -- install jsregexp (optional!).
-    build = "make install_jsregexp"
+    build = "make install_jsregexp",
+    dependencies = { "rafamadriz/friendly-snippets" }
   },
 
   { 'windwp/nvim-autopairs' },
+
   -- Autocompletion
   {
     'hrsh7th/nvim-cmp',
     event = 'InsertEnter',
+    dependencies = {
+      'L3MON4D3/LuaSnip',
+      'hrsh7th/cmp-nvim-lsp',
+      'hrsh7th/cmp-buffer',
+      'hrsh7th/cmp-path',
+      'hrsh7th/cmp-nvim-lsp-signature-help'
+    },
     config = function()
       local cmp = require 'cmp'
-
-      -- luasnip setup
       local luasnip = require 'luasnip'
-      require('luasnip.loaders.from_vscode').lazy_load()
-      luasnip.config.setup {}
+
+      -- Lazy-load snippets for better performance
+      vim.api.nvim_create_autocmd("InsertEnter", {
+        callback = function()
+          require('luasnip.loaders.from_vscode').lazy_load()
+          require('luasnip.loaders.from_lua').load({ paths = "~/.config/nvim/lua/snippets" })
+        end,
+      })
 
       local cmp_autopairs = require('nvim-autopairs.completion.cmp')
 
-      cmp.event:on(
-        'confirm_done',
-        cmp_autopairs.on_confirm_done()
-      )
+      cmp.event:on('confirm_done', cmp_autopairs.on_confirm_done())
 
       cmp.setup {
         snippet = {
@@ -42,8 +53,6 @@ return {
           end,
         },
         mapping = cmp.mapping.preset.insert {
-          ['<C-u>'] = cmp.mapping.select_next_item(),
-          ['<C-d>'] = cmp.mapping.select_prev_item(),
           ['<C-p>'] = cmp.mapping.scroll_docs(-4),
           ['<C-n>'] = cmp.mapping.scroll_docs(4),
           ['<C-Space>'] = cmp.mapping.complete {},
@@ -57,6 +66,7 @@ return {
             elseif luasnip.expand_or_locally_jumpable() then
               luasnip.expand_or_jump()
             else
+              cmp.complete()
               fallback()
             end
           end, { 'i', 's' }),
@@ -70,13 +80,24 @@ return {
             end
           end, { 'i', 's' }),
         },
-        sources = {
+        sources = cmp.config.sources({
           { name = 'nvim_lsp' },
           { name = 'luasnip' },
-        },
+          { name = 'buffer' },
+          { name = 'path' },
+          { name = 'nvim_lsp_signature_help' },
+        }),
+      }
+
+      -- Ensure LSP capabilities include snippet support
+      local capabilities = require("cmp_nvim_lsp").default_capabilities()
+
+      require("lspconfig").gopls.setup {
+        capabilities = capabilities,
       }
     end
-  },
+  }
+  ,
 
   -- LSP
   {
