@@ -17,7 +17,20 @@ return {
     dependencies = { "rafamadriz/friendly-snippets" }
   },
 
-  { 'windwp/nvim-autopairs' },
+  {
+    "windwp/nvim-autopairs",
+    event = "InsertEnter",
+    config = function()
+      require("nvim-autopairs").setup()
+    end,
+  },
+  {
+    "windwp/nvim-ts-autotag",
+    event = "InsertEnter",
+    config = function()
+      require("nvim-ts-autotag").setup()
+    end,
+  },
 
   -- Autocompletion
   {
@@ -41,10 +54,6 @@ return {
           require('luasnip.loaders.from_lua').load({ paths = "~/.config/nvim/lua/snippets" })
         end,
       })
-
-      local cmp_autopairs = require('nvim-autopairs.completion.cmp')
-
-      cmp.event:on('confirm_done', cmp_autopairs.on_confirm_done())
 
       cmp.setup {
         snippet = {

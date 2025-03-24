@@ -2,9 +2,6 @@
 return {
   {
     "nvim-treesitter/nvim-treesitter",
-    dependencies = {
-      "windwp/nvim-ts-autotag"
-    },
 
     version = false,             -- last release is way too old and doesn't work on Windows
     build = ":TSUpdate",
@@ -76,11 +73,7 @@ return {
     config = function()
       local ts_config = require("nvim-treesitter.configs")
 
-      ts_config.setup({
-        autotag = {
-          enable = true
-        }
-      })
+      ts_config.setup({})
     end
   },
   {
