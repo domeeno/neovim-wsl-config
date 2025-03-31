@@ -165,9 +165,12 @@ return {
       })
 
       require('mason-lspconfig').setup({
-        ensure_installed = { "lua_ls", "jdtls" },
+        ensure_installed = { "clangd", "lua_ls", "jdtls" },
         handlers = {
           lsp_zero.default_setup,
+          clangd = function()
+            require('lspconfig').clangd.setup {}
+          end,
           lua_ls = function()
             local lua_opts = lsp_zero.nvim_lua_ls()
             require('lspconfig').lua_ls.setup(lua_opts)
@@ -176,9 +179,15 @@ return {
       })
 
       require('mason-nvim-dap').setup({
-        ensure_installed = { "java-debug-adapter", "java-test" }
+        ensure_installed = { "java-debug-adapter", "java-test", "cppdbg" }
       })
     end
+  },
+  {
+    "mfussenegger/nvim-dap",
+    dependencies = {
+      "mfussenegger/nvim-dap-ui"
+    }
   },
   {
     "mfussenegger/nvim-jdtls",
