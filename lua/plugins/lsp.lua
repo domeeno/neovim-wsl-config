@@ -186,8 +186,59 @@ return {
   {
     "mfussenegger/nvim-dap",
     dependencies = {
-      "mfussenegger/nvim-dap-ui"
-    }
+      "nvim-neotest/nvim-nio",
+      "rcarriga/nvim-dap-ui",             -- UI for DAP
+      "theHamsta/nvim-dap-virtual-text",  -- Inline debugging text
+      "mfussenegger/nvim-dap-python",     -- Python debugging support
+      "nvim-telescope/telescope-dap.nvim" -- Telescope integration
+    },
+    config = function()
+      local dap = require("dap")
+      local dapui = require("dapui")
+
+      dap.adapters.gdb = {
+        type = "executable",
+        command = "gdb",
+        args = { "-i", "dap" }
+      }
+
+      dap.configurations.c = {
+        {
+          name = "Launch",
+          type = "gdb",
+          request = "launch",
+          program = function()
+            return vim.fn.input("Path to executable: ", "./", "file")
+          end,
+          cwd = "${workspaceFolder}",
+          stopAtEntry = false
+        }
+      }
+
+      -- DAP UI Setup
+      dapui.setup()
+      require("nvim-dap-virtual-text").setup()
+
+      -- Auto open/close UI on debug start/stop
+      dap.listeners.after.event_initialized["dapui_config"] = function()
+        dapui.open()
+      end
+      dap.listeners.before.event_terminated["dapui_config"] = function()
+        dapui.close()
+      end
+      dap.listeners.before.event_exited["dapui_config"] = function()
+        dapui.close()
+      end
+
+      -- Keybindings for DAP
+      vim.keymap.set("n", "<F5>", dap.continue, { desc = "Start/Continue Debugging" })
+      vim.keymap.set("n", "<F10>", dap.step_over, { desc = "Step Over" })
+      vim.keymap.set("n", "<F11>", dap.step_into, { desc = "Step Into" })
+      vim.keymap.set("n", "<F12>", dap.step_out, { desc = "Step Out" })
+      vim.keymap.set("n", "<Leader>db", dap.toggle_breakpoint, { desc = "Toggle Breakpoint" })
+      vim.keymap.set("n", "<Leader>dr", dap.repl.open, { desc = "Open Debug Console" })
+      vim.keymap.set("n", "<Leader>du", dapui.toggle, { desc = "Toggle Debug UI" })
+    end
   },
   {
     "mfussenegger/nvim-jdtls",
